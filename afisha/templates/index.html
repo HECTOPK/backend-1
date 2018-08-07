@@ -1,17 +1,10 @@
 {% extends 'base.html' %}
-{% load bootstrap4 %}
 {% block content %}
-    <!-- Begin page content -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
-          integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-    <h1 class="mt-5">Afisha</h1>
-
-    <div class="row">
-
-    </div>
-    <p class="lead"></p>
-    <script>
-
-    </script>
-
+	<div class="content">
+		<ul class="list-group">
+			{% for item in all %}
+				 <li class="list-group-item"><a href='{% url 'film_url' item.id %}' >{{item.name}}</li>
+			{% endfor %}
+		</ul>
+	</div>
 {% endblock %}

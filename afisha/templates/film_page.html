@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	{% if error %}
+		<div class="alert alert-danger">
+			{{error}}
+		</div>
+	{% else %}
+		<h1>{{film.name}}</h1>
+		{% if film.about %}
+			<span>{{film.about}}</span>
+		{% endif %}
+		<br />
+		<h3>Cеансы:</h3>
+		<ul class="list-group">
+			{% for cinema in cinemas %}
+				{% if cinema.seances != 0 %}
+					<li class="list-group-item">
+						{{cinema.cinema.name}}
+						<br />
+						<div class="row">
+							{% for seance in cinema.seances %}
+								<div class="col-1">
+									{{seance.time | date:'H:i'}}
+								</div>
+							{% endfor %}
+						</div>
+					</li>
+				{% endif %}
+
+			{% endfor %}
+		</ul>
+	{% endif %}
+{% endblock %}

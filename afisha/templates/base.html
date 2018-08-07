@@ -10,15 +10,23 @@
   <link rel="stylesheet" href="{% static 'fontawesome-5/css/all.css' %}">
 </head>
 <body>
-<div>
-  <br>
-	{% block content %}{% endblock %}
-  <br>
-</div>
-<div class="container-fluid">
-  <footer class="page-footer font-small blue text-center jumbotron">
-	 footer
-  </footer>
-</div>
+	<ul class="nav">
+		{% url 'home_url' as home_url %}
+		{% if request.path != home_url %}
+	  		<li class="nav-item">
+				<a class="nav-link" href="{% url 'home_url' %}">Все фильмы</a>
+	  		</li>
+		{% endif %}
+	</ul>
+	<div class="container">
+	  <br>
+		{% block content %}{% endblock %}
+	  <br>
+	</div>
+	<div class="container-fluid">
+	  <footer class="page-footer font-small blue text-center jumbotron">
+		 footer
+	  </footer>
+	</div>
 </body>
 </html>
