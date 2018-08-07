@@ -1,10 +1,16 @@
 from django.db import models
 
+class Film(models.Model):
+	name = models.CharField(max_length=200, null=True, default=None)
+	about = models.CharField(max_length=1000, null=True, default=None)
+	url = models.URLField(null=True, default=None)
 
-class Bitcoin(models.Model):
-    """Биток"""
-    total = models.CharField("Тотал", max_length=50)
-    blocks = models.IntegerField("Blocks", default=0)
+class Cinema(models.Model):
+	name = models.CharField(max_length=200, null=True, default=None)
+	url = models.URLField(null=True, default=None)
 
-    def __str__(self):
-        return self.total
+class Seance(models.Model):
+	film = models.ForeignKey(Film, on_delete=models.CASCADE, related_name='seances')
+	cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE, related_name='seances')
+	time = models.TimeField()
+	date = models.DateField()
