@@ -31,6 +31,9 @@ def film_page_with_date(request, film_id, date):
 
 	context['date'] = date
 	context['film'] = film
+	context['dates'] = []
+	for i in range(0,7):
+		context['dates'].append(datetime.date.today() + datetime.timedelta(days=i))
 	context['seances'] = Seance.objects.filter(film=film, date=date)
 
 	return render(request, 'film_page.html', context)

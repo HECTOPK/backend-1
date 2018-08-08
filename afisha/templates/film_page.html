@@ -6,17 +6,41 @@
 			{{error}}
 		</div>
 	{% else %}
-		<h1>{{film.name}}</h1>
-		{% if film.about %}
-			<span>{{film.about}}</span>
-		{% endif %}
+		<div class="row">
+			<div class="col-7">
+				<h1>{{film.name}}</h1>
+				{% if film.about %}
+					<span>{{film.about}}</span>
+				{% endif %}
+				<br><br>
+				<h3>Трейлер:</h3>
+				<iframe width="90%" height="315" src="{{film.trailer_url}}" class="mt-2">
+				</iframe>
+			</div>
+			<div class="col-5">
+				<img src="{{film.poster_url}}" alt="" style="width:100%">
+
+			</div>
+		</div>
+
+
 		<br />
 		<h3>Cеансы:</h3>
+		<div class="dropdown my-2">
+			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+			 {{date | date:'d/m/Y'}}
+			</button>
+			<div class="dropdown-menu">
+				{% for item in dates %}
+					<a class="dropdown-item" href="{% url 'film_with_date_url' film.id item %}">{{item | date:'d/m/Y'}}</a>
+				{% endfor %}
+			</div>
+		</div>
 		<ul class="list-group">
 			{% for cinema in cinemas %}
 				{% if cinema.seances != 0 %}
 					<li class="list-group-item">
-						{{cinema.cinema.name}}
+						{{cinema.cinema.name}} ({{cinema.cinema.address}})
 						<br />
 						<div class="row">
 							{% for seance in cinema.seances %}
