@@ -17,7 +17,7 @@ def del_data(request):
 
 def get_data(request):
 	try:
-		response = requests.get(url="https://api.internationalshowtimes.com/v4/showtimes", params={'countries': 'GB', 'fields': 'id,movie_id,cinema_id,start_at','location':'51.51,-0.13', 'distance': 500'}, headers={'X-API-Key': 'iBLYR2MIVfV8uZ3hSMdg2OJVmJpCnSp0'},)
+		response = requests.get(url="https://api.internationalshowtimes.com/v4/showtimes", params={'countries': 'GB', 'fields': 'id,movie_id,cinema_id,start_at','location':'51.51,-0.13', 'distance': '500'}, headers={'X-API-Key': 'iBLYR2MIVfV8uZ3hSMdg2OJVmJpCnSp0'},)
 		data = response.json()['showtimes']
 		#return HttpResponse(response.content)
 		i = 1
