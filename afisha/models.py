@@ -8,11 +8,13 @@ class Film(models.Model):
 	trailer_url = models.URLField(null=True, default=None)
 	genres = models.CharField(max_length=1000, null=True, default=None)
 	runtime = models.IntegerField(default=None, null=True)
+	imdb_rating = models.FloatField(default=0)
 
 class Cinema(models.Model):
 	name = models.CharField(max_length=200, null=True, default=None)
 	address = models.CharField(max_length=200, null=True, default=None)
 	cinema_id = models.IntegerField(default=0)
+	city = models.CharField(max_length=200, null=True, default=None)
 
 class Seance(models.Model):
 	film = models.ForeignKey(Film, on_delete=models.CASCADE, related_name='seances')

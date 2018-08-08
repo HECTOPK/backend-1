@@ -16,22 +16,27 @@
 					<p class="h5">Продолжительность: {{film.runtime}} мин.</p>
 				{% endif %}
 				{% if genres %}
-					<p class="h5">Жанры:</p>
+					<p class="h5">Жанр:</p>
 					<ul class="list-group list-group-flush">
 						{% for genre in genres %}
 							<li class="list-group-item">{{genre}}</li>
 						{% endfor %}
 					</ul>
 				{% endif %}
+				{% if imdb_rating %}
+					<p class="h5">Рейтинг imdb: {{imdb_rating}}</p>
+				{% endif %}
 				<br>
-				<h3>Трейлер:</h3>
-				<iframe width="90%" height="315" src="{{film.trailer_url}}" class="mt-2">
-				</iframe>
+				{% if film.trailer_url %}
+					<h3>Трейлер:</h3>
+					<iframe width="90%" height="315" src="{{film.trailer_url}}" class="mt-2"></iframe>
+				{% endif %}
 			</div>
-			<div class="col-5">
-				<img src="{{film.poster_url}}" alt="" style="width:100%">
-
-			</div>
+			{% if film.poster_url %}
+				<div class="col-5">
+					<img src="{{film.poster_url}}" alt="" style="width:100%">
+				</div>
+			{% endif %}
 		</div>
 
 

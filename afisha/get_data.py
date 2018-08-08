@@ -17,7 +17,7 @@ def del_data(request):
 
 def get_data(request):
 	try:
-		response = requests.get(url="https://api.internationalshowtimes.com/v4/showtimes", params={'countries': 'GB', 'fields': 'id,movie_id,cinema_id,start_at','location':'51.51,-0.13', 'distance': '5'}, headers={'X-API-Key': 'iBLYR2MIVfV8uZ3hSMdg2OJVmJpCnSp0'},)
+		response = requests.get(url="https://api.internationalshowtimes.com/v4/showtimes", params={'countries': 'GB', 'fields': 'id,movie_id,cinema_id,start_at','location':'51.51,-0.13', 'distance': 500'}, headers={'X-API-Key': 'iBLYR2MIVfV8uZ3hSMdg2OJVmJpCnSp0'},)
 		data = response.json()['showtimes']
 		#return HttpResponse(response.content)
 		i = 1
@@ -40,6 +40,7 @@ def get_data(request):
 					film_object.trailer_url = str.replace(film_object.trailer_url, 'watch?v=','embed/')
 					film_object.runtime = int(film_data['movie']['runtime'])
 					film_object.genres = json.dumps(film_data['movie']['genres'])
+					film_object.genres = float(film_data['raitings']['imdb']['value'])
 					print(str(film_data['movie']['genres']))
 				except TypeError:
 					print('TypeError')
@@ -54,6 +55,7 @@ def get_data(request):
 				cinema_object.cinema_id = item['cinema_id']
 				cinema_object.name = cinema_data['cinema']['name']
 				cinema_object.address = cinema_data['cinema']['location']['address']['display_text']
+				cinema_object.city = cinema_data['cinema']['location']['address']['city']
 				cinema_object.save()
 			seance_object = Seance()
 			seance_object.film = film_object

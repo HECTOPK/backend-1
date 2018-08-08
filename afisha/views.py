@@ -34,13 +34,14 @@ def film_page_with_date(request, film_id, date):
 	for item in json.loads(film.genres):
 		genres.append(item['name'])
 	context['genres'] = genres
-
+	context['imdb_rating'] = film.imdb_rating
 	context['runtime'] = film.runtime
 	context['date'] = date
 	context['film'] = film
 	context['dates'] = []
 	for i in range(0,7):
-		context['dates'].append(datetime.date.today() + datetime.timedelta(days=i))
+		if film.seances.filter(date=(datetime.date.today() + datetime.timedelta(days=i))).count() > 0:
+			context['dates'].append(datetime.date.today() + datetime.timedelta(days=i))
 	context['seances'] = Seance.objects.filter(film=film, date=date)
 
 	return render(request, 'film_page.html', context)
