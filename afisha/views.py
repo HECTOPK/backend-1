@@ -1,9 +1,10 @@
-import requests
+import requests, re, json
 import datetime
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import render
 from .models import *
+
 
 # вывод страницы стписка фильмов
 def list_page(request):
@@ -28,7 +29,13 @@ def film_page_with_date(request, film_id, date):
 		if len(array) != 0:
 			context['cinemas'].append({'cinema':cinema, 'seances': array})
 		#context['cinemas'].append(array)
+	genres =[]
+	film.genres = str.replace(film.genres,"\'", "\"")
+	for item in json.loads(film.genres):
+		genres.append(item['name'])
+	context['genres'] = genres
 
+	context['runtime'] = film.runtime
 	context['date'] = date
 	context['film'] = film
 	context['dates'] = []

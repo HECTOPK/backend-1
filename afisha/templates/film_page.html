@@ -10,9 +10,20 @@
 			<div class="col-7">
 				<h1>{{film.name}}</h1>
 				{% if film.about %}
-					<span>{{film.about}}</span>
+					<p>{{film.about}}</p>
 				{% endif %}
-				<br><br>
+				{% if runtime %}
+					<p class="h5">Продолжительность: {{film.runtime}} мин.</p>
+				{% endif %}
+				{% if genres %}
+					<p class="h5">Жанры:</p>
+					<ul class="list-group list-group-flush">
+						{% for genre in genres %}
+							<li class="list-group-item">{{genre}}</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+				<br>
 				<h3>Трейлер:</h3>
 				<iframe width="90%" height="315" src="{{film.trailer_url}}" class="mt-2">
 				</iframe>

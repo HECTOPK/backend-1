@@ -6,6 +6,8 @@ class Film(models.Model):
 	poster_url = models.URLField(null=True, default=None)
 	movie_id = models.IntegerField(default=0)
 	trailer_url = models.URLField(null=True, default=None)
+	genres = models.CharField(max_length=1000, null=True, default=None)
+	runtime = models.IntegerField(default=None, null=True)
 
 class Cinema(models.Model):
 	name = models.CharField(max_length=200, null=True, default=None)

@@ -1,4 +1,4 @@
-import datetime, time
+import datetime, time, json
 from .models import *
 from django.http import HttpResponse
 from bs4 import BeautifulSoup
@@ -38,6 +38,9 @@ def get_data(request):
 					film_object.poster_url = film_data['movie']['poster_image']['image_files'][6]['url']
 					film_object.trailer_url = film_data['movie']['trailers'][0]['trailer_files'][0]['url']
 					film_object.trailer_url = str.replace(film_object.trailer_url, 'watch?v=','embed/')
+					film_object.runtime = int(film_data['movie']['runtime'])
+					film_object.genres = json.dumps(film_data['movie']['genres'])
+					print(str(film_data['movie']['genres']))
 				except TypeError:
 					print('TypeError')
 
