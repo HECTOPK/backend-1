@@ -30,10 +30,11 @@ def film_page_with_date(request, film_id, date):
 			context['cinemas'].append({'cinema':cinema, 'seances': array})
 		#context['cinemas'].append(array)
 	genres =[]
-	film.genres = str.replace(film.genres,"\'", "\"")
-	for item in json.loads(film.genres):
-		genres.append(item['name'])
-	context['genres'] = genres
+	if film.genres:
+		film.genres = str.replace(film.genres,"\'", "\"")
+		for item in json.loads(film.genres):
+			genres.append(item['name'])
+		context['genres'] = genres
 	context['imdb_rating'] = film.imdb_rating
 	context['runtime'] = film.runtime
 	context['date'] = date
