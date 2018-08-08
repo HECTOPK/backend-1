@@ -40,7 +40,7 @@ def get_data(request):
 					film_object.trailer_url = str.replace(film_object.trailer_url, 'watch?v=','embed/')
 					film_object.runtime = int(film_data['movie']['runtime'])
 					film_object.genres = json.dumps(film_data['movie']['genres'])
-					film_object.genres = float(film_data['raitings']['imdb']['value'])
+					film_object.genres = float(film_data['ratings']['imdb']['value'])
 					print(str(film_data['movie']['genres']))
 				except TypeError:
 					print('TypeError')
